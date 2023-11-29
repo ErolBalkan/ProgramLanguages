@@ -1,34 +1,34 @@
+
+
 import java.io.IOException;
 
-public class SerializationDemo {
+
+public class InheritanceDemo {
 
 	public static void main(String[] args) {
+		// TODO Auto-generated method stub
 
-        String outputFile="serializationdemo.txt";
-        SerializationDef def = new SerializationDef();
-        def.setProduct("testProduct");
-        def.setFeature("testFeature");
-        def.setFeatureCount(10);
-         
-        // Serialize the object into a file.
-        try {
-            SerializationLib.doSerialize(def, outputFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-         
-        // Deserialize from a file into an object.
-        SerializationDef defNext = null;
-        try {
-        	defNext = (SerializationDef) SerializationLib.doDeserialize(outputFile);
-        } catch (ClassNotFoundException | IOException e) {
-            e.printStackTrace();
-        }
-         
-        System.out.println("def():\n --"+"\n  |\n  "+def);
-        System.out.println(System.lineSeparator());
-        System.out.println("defNext():\n --"+"\n  |\n  "+defNext);
+		String fileName = "childclass.txt";
+
+		ChildClass childClass = new ChildClass();
+		childClass.setProductId(21);
+		childClass.setProduct("Blog");
+		childClass.setBrand("TechBeamers");
+
+		try {
+			SerializationLib.doSerialize(childClass, fileName);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
+
+		try {
+			ChildClass newChild = (ChildClass) SerializationLib
+					.doDeserialize(fileName);
+			System.out.println("ChildClass output:  \n  |\n   --" + newChild);
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
